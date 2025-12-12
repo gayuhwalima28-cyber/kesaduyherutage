@@ -1,0 +1,324 @@
+/* ================= THEME: FOREST TENGGER ================= */
+:root{
+  --bg-dark: #08140e;        /* deep forest */
+  --bg-mid:  #0d2a1b;        /* mid */
+  --accent:  #b7eec9;        /* soft mint (accent) */
+  --gold:    #d69e45;        /* warm gold for highlights */
+  --card:    rgba(8,20,14,0.65);
+  --glass:   rgba(255,255,255,0.03);
+  --text:    #e9ffee;
+  --muted:   #9db9a8;
+  .ethnic-frame{
+    background-image: var(--ethnic);
+}
+  --radius: 16px;
+  --max-width: 1100px;
+}
+
+body{
+margin:0;
+font-family: Inter, "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+
+background: 
+  linear-gradient(180deg, rgba(4,10,6,1) 0%, rgba(7,18,12,1) 60%),
+  url('https://upload.wikimedia.org/wikipedia/commons/3/3c/Yadnya_Kasada_festival_at_Mount_Bromo.jpg');
+
+background-size: cover;
+background-position: center;
+background-attachment: fixed;
+
+color:var(--text);
+-webkit-font-smoothing:antialiased;
+overflow-x:hidden;
+}
+
+
+/* ================= HEADER / HERO ================= */
+header{
+  position:sticky;
+  top:0;
+  z-index:40;
+  backdrop-filter: blur(6px);
+  background: linear-gradient(90deg, rgba(5,12,8,0.55), rgba(5,12,8,0.35));
+  border-bottom: 1px solid rgba(183,238,201,0.07);
+}
+.header-inner{
+  max-width:var(--max-width);
+  margin:0 auto;
+  display:flex;
+  gap:16px;
+  align-items:center;
+  padding:16px;
+  padding-left:22px;
+}
+.logo{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+.logo .badge{
+  width:52px;height:52px;border-radius:10px;
+  background:linear-gradient(135deg,var(--gold),rgba(199,163,107,0.7));
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;color:#121212;font-size:18px;
+}
+.site-title{font-weight:700;font-size:18px;letter-spacing:0.6px}
+.site-sub{font-size:12px;color:var(--muted)}
+
+nav{margin-left:auto}
+nav a{
+  color:var(--accent);
+  text-decoration:none;
+  margin:0 10px;
+  font-weight:600;
+  padding:8px 10px;border-radius:8px;
+  transition:all .22s ease;
+}
+nav a:hover{transform:translateY(-3px); color:var(--gold); box-shadow: 0 6px 18px rgba(0,0,0,0.35);}
+
+/* ================= HERO SECTION with PARALLAX LAYERS ================= */
+.hero{
+  position:relative;
+  padding:64px 20px 36px;
+  overflow:visible;
+  min-height:360px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.parallax{
+  position:absolute; inset:0; pointer-events:none; z-index:1;
+}
+.layer{
+  position:absolute; inset:0; background-repeat:no-repeat; background-position:center; background-size:cover;
+  transform-origin:center;
+}
+.layer.fg{
+  background-image:linear-gradient(180deg, rgba(5,10,6,0.0), rgba(5,10,6,0.8)); mix-blend-mode:multiply; opacity:0.95
+}
+.layer.mid{
+  background-image: url('bromo3.jpg'); 
+  filter:blur(2px) saturate(105%);
+}
+.layer.bg{
+  background-image: url('bromo2.jpg'); 
+  filter:brightness(.75) contrast(.95);
+}
+
+.hero-card{
+  position:relative;
+  z-index:10;
+  max-width:var(--max-width);
+  width:100%;
+  display:flex;
+  gap:24px;
+  align-items:center;
+  padding:28px;
+  border-radius:18px;
+  background: linear-gradient(180deg, rgba(6,20,14,0.6), rgba(8,26,18,0.55));
+  box-shadow: 0 8px 40px rgba(14, 62, 38, 0.6);
+  border: 1px solid rgba(183,238,201,0.06);
+  backdrop-filter: blur(6px) saturate(1.05);
+}
+
+.hero-left{flex:1}
+.hero-right{width:340px; min-width:260px; position:relative}
+
+.hero h1{margin:0;font-size:36px;line-height:1.05; color:var(--accent)}
+.hero p.lead{margin-top:10px;color:var(--text);opacity:.95; font-size:15px}
+.ctas{margin-top:18px;display:flex;gap:12px}
+.btn{
+  padding:10px 14px;border-radius:12px;border:none;cursor:pointer;font-weight:700;
+  background:linear-gradient(180deg,var(--accent),rgba(167,240,201,0.18)); color:#042218;
+  box-shadow: 0 10px 30px rgba(11,38,26,0.45);
+}
+.btn.ghost{
+  background:transparent;color:var(--text);border:1px solid rgba(183,238,201,0.12);
+}
+
+/* small decorative flame */
+.flame-wrap{
+  position:absolute; right:14px; top:-26px; transform:translateY(-6px);
+}
+.flame{
+  width:48px;height:80px; position:relative;
+  filter:drop-shadow(0 6px 14px rgba(0,0,0,0.45));
+}
+.flame .core{
+  position:absolute; left:50%; transform:translateX(-50%); bottom:0;
+  width:18px;height:40px;border-radius:50% 50% 40% 40%; background:linear-gradient(180deg,#ffb36b,#ff6a2e);
+  animation: flicker 1200ms infinite ease-in-out;
+  box-shadow: 0 12px 30px rgba(255,110,40,0.25);
+}
+.flame .glow{
+  position:absolute; left:50%; transform:translateX(-50%); bottom:-8px;
+  width:54px;height:22px;border-radius:50%; background: radial-gradient(circle, rgba(199,163,107,0.28), rgba(199,163,107,0) 60%);
+  filter:blur(6px); opacity:.9;
+  animation: glow 1300ms infinite ease-in-out;
+}
+
+@keyframes flicker{
+  0%{transform:translateX(-50%) scale(1) translateY(0)}
+  50%{transform:translateX(-50%) scale(1.06) translateY(-2px)}
+  100%{transform:translateX(-50%) scale(1) translateY(0)}
+}
+@keyframes glow{
+  0%{opacity:.85}
+  50%{opacity:.55}
+  100%{opacity:.85}
+}
+
+/* ================= CONTENT SECTIONS ================= */
+.container{max-width:var(--max-width); margin:0 auto; padding:40px 20px; position:relative; z-index:20}
+
+.section{
+  margin:30px auto; padding:26px; border-radius:12px;
+  background: linear-gradient(180deg, rgba(5,12,8,0.45), rgba(7,16,12,0.32));
+  border:1px solid rgba(183,238,201,0.04);
+  box-shadow: 0 10px 30px rgba(3,8,6,0.5);
+  display:block;
+}
+.section h2{color:var(--gold); margin-top:0; font-size:20px}
+.section p{color:var(--text); opacity:.95; line-height:1.65}
+
+/* ETHNIC FRAME for images/text */
+.ethnic-frame{
+padding:14px;
+border-radius:12px;
+background: rgba(255,255,255,0.02);  /* lembut, tidak ada garis */
+border: 1px solid rgba(183,238,201,0.05);
+}
+
+
+/* ================= GALLERY with LIGHTBOX ================= */
+.gallery{
+  display:grid; gap:12px;
+  grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+  margin-top:12px;
+}
+.gallery figure{
+  margin:0; position:relative; overflow:hidden; border-radius:10px;
+  cursor:pointer;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+.gallery img{display:block;width:100%;height:170px;object-fit:cover;transition:transform .45s cubic-bezier(.2,.9,.2,1)}
+.gallery figure:hover img{transform:scale(1.07) rotate(-.4deg)}
+.gallery figcaption{
+  position:absolute; left:10px; bottom:10px; color:var(--text); font-weight:700;
+  text-shadow: 0 4px 18px rgba(2,8,6,0.7); font-size:13px;
+}
+
+/* lightbox modal */
+.modal{position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:80; background:rgba(2,6,4,0.6)}
+.modal.open{display:flex}
+.modal .modal-card{max-width:92%; max-height:86%; border-radius:12px; overflow:hidden; background:#06130d; padding:12px}
+.modal img{max-width:100%; max-height:80vh; display:block}
+.modal .close{position:absolute; right:18px; top:18px; background:rgba(0,0,0,0.45); color:var(--text); border:none; padding:8px 10px; border-radius:8px; cursor:pointer}
+
+/* ================= VIDEO + AUDIO ================= */
+.video-wrap{display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap}
+.video-card{flex:1; min-width:280px; border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,0.04)}
+.video-card iframe, .video-card video{width:100%; height:320px; display:block; border:none}
+
+/* ================= FOOTER ================= */
+footer{padding:26px 20px; text-align:center; color:var(--muted); margin-top:40px}
+footer .small{font-size:13px;color:rgba(183,238,201,0.6)}
+
+/* responsive */
+@media (max-width:900px){
+  .hero-card{flex-direction:column; padding:18px}
+  .hero-right{width:100%}
+  .gallery img{height:150px}
+  .modal .modal-card{padding:8px}
+}
+
+.video-card {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  border-radius: 12px;
+  gap: 20px;
+}
+
+.video-content {
+    display: flex;
+    flex-direction: row; /* teks di samping video */
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.video-text {
+    flex: 1; /* mengambil ruang yang tersedia */
+    font-size: 16px; /* default font untuk laptop/desktop */
+    line-height: 1.6;
+    color: var(--text);
+}
+
+.video-wrapper {
+  flex: 1;
+}
+
+/* Responsive: jadi satu kolom di layar kecil */
+@media (max-width:900px){
+    .video-content {
+      flex-direction: column;
+    }
+    .video-text {
+      font-size: 14px;
+    }
+  }
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+.thumb {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #eee;
+}
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .35s ease;
+}
+.thumb:hover img {
+  transform: scale(1.06);
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,.75);
+  z-index: 9999;
+}
+.lightbox.open {
+  display: flex;
+}
+.lb-img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 8px;
+}
+.btn-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+}

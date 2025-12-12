@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kasada Heritage — Forest Tengger</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-sA+9R6+5u4JXhksz7pRUEwP45AwF48Q1Rk+dxKp3Cqo=" crossorigin=""/>
+
+  <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+
+ <div id="landing" style="
+  position:fixed;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  color:var(--text-color);
+  text-align:center;
+  overflow:hidden;
+">
+  <video autoplay muted loop playsinline style="
+    position:absolute;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-2;
+    filter: brightness(60%);
+  ">
+    <source src="kasadadrone.mp4" type="video/mp4">
+    Browser Anda tidak mendukung video.
+  </video>
+
+  <h1 style="color:var(--text);font-size:48px; margin-bottom:10px; text-shadow:0 4px 12px rgba(0,0,0,0.6);">Kasada Heritage</h1>
+<p style="font-size:18px; margin-top:0; margin-bottom:30px; line-height:1.2;">
+  Forest Tengger • Pelestarian Budaya
+</p>
+<button id="enterBtn" style="
+  padding:12px 24px;
+  font-size:16px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  background:linear-gradient(135deg,#f7d794,#e55039);
+  color:white;
+  font-weight:700;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+">Masuk</button>
+</div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-oY1aFtgO1nX1ErGURD5tvx9U7N21rGJ4e8cW0k0hP94=" crossorigin=""></script>
+
+
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <div class="badge" style="padding:0;">
+  <img src="LOGO.png" alt="Logo Kasada" 
+       style="width:55px; height:55px; object-fit:cover; border-radius:12px;">
+</div>
+        <div>
+          <div class="site-title">Kasada Heritage</div>
+          <div class="site-sub">Forest Tengger • Pelestarian Budaya</div>
+        </div>
+      </div>
+
+      <nav>
+        <a href="#sejarah">Sejarah</a>
+        <a href="#video">Video</a>
+        <a href="#galeri">Galeri</a>
+        <a href="#ai">AI</a>
+      </nav>
+
+      <button id="themeToggle" style="
+    margin-left:12px;
+    padding:6px 12px;
+    border-radius:10px;
+    border:none;
+    cursor:pointer;
+    font-weight:600;
+    background: linear-gradient(135deg,#f7d794,#e55039);
+    color:white;
+    transition:0.3s;
+">🌗</button>
+
+<style>
+  :root {
+    --bg-color: #ffffff;
+    --text-color: #1a1a1a;
+  }
+
+  /* Mode Light */
+  body.light-mode {
+    --bg-color: #ffffff;
+    --text-color: #0e0c0c;
+  }
+
+  /* Mode Dark */
+  body.dark-mode {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+  }
+
+  body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    transition: 0.3s ease;
+  }
+</style>
+
+    </div>
+  </header>
+  <section class="hero" aria-hidden="false">
+    <div class="parallax" id="parallax">
+      <div class="layer bg" data-speed="0.12"></div>
+      <div class="layer mid" data-speed="0.25"></div>
+      <div class="layer fg" data-speed="0.45"></div>
+    </div>
+
+    <div class="hero-card" role="banner">
+      <div class="hero-left">
+        <h1>Kasada Heritage</h1>
+        <p class="lead">Melestarikan ritual Yadnya Kasada lewat narasi visual, suara, dan interaksi</p>
+        <div class="ctas">
+          <button class="btn" onclick="document.getElementById('sejarah').scrollIntoView({behavior:'smooth'})">Pelajari Sejarah</button>
+          <button class="btn ghost" onclick="document.getElementById('galeri').scrollIntoView({behavior:'smooth'})">Lihat Galeri</button>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="ethnic-frame" style="padding:14px; border-radius:12px;">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="flex-shrink:0">
+              <img src="kasada.jpg" alt="Kasada" style="width:110px;height:110px;object-fit:cover;border-radius:10px;border:4px solid rgba(183,238,201,0.08)">
+            </div>
+            <div>
+              <div style="font-weight:700;color:var(--accent)">Yadnya Kasada</div>
+              <div style="font-size:13px;color:var(--muted)">Ritual tahunan masyarakat Tengger</div>
+              <div style="margin-top:10px"><small style="color:var(--muted)">Gunung Bromo, Jawa Timur</small></div>
+            </div>
+          </div>
+
+          <div class="flame-wrap" aria-hidden="true">
+            <div class="flame">
+              <div class="core"></div>
+              <div class="glow"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container" id="main">
+
+    <article id="sejarah" class="section ethnic-frame" aria-labelledby="h-sejarah">
+      <h2 id="h-sejarah">Sejak abad ke-13 Masehi</h2>
+      <p>
+        <p>Versi legenda menyatakan Tengger berasal dari gabungan nama dua leluhur mereka, yakni Rara Anteng (Teng), putri raja Brawijaya, dan Joko Seger (Ger), putra seorang Brahmana Kediri. Keduanya menikah dan hidup di sekitar wilayah Penanjakan, tak jauh dari Gunung Bromo. Tapi mereka tak punya anak untuk waktu lama. Hingga akhirnya mereka berdoa kepada Sang Hyang Widhi Wasa.</p>
+        <p>Rara Anteng dan Joko Seger berjanji jika punya anak, salah satu anaknya akan dikorbankan. Tak lama kemudian, Rara Anteng hamil dan melahirkan. Anak mereka berjumlah 25. Setelah lahir, salah seorang anak mereka, Raden Kusuma, menghilang. Mereka kemudian mendengar suara Raden Kusuma keluar dari kawah Gunung Bromo.</p>
+        <p>“Keturunan Rara Anteng dan Joko Seger atau masyarakat Tengger dapat hidup aman sejahtera bila pada waktu-waktu tertentu mereka memberi korban ke kawah Gunung Bromo,” sebut Sudiro.</p>
+      </p>
+      <p style="color:var(--muted); margin-top:8px">
+        <strong>Catatan:</strong> "Kasada bukan sekadar ritual, tetapi janji yang harus dijaga.
+      Selama asap suci Bromo masih naik ke langit, selama manusia masih menggantungkan hidup pada bumi, maka rasa syukur dan pengorbanan harus tetap hidup dalam hati kita." -sesepuh
+      </p>
+    </article>
+
+    <section id="infoTambahan" class="section ethnic-frame">
+  <h2>Memberi Korban</h2>
+    <p>Warga Tengger yakin bahwa rutin memberi korban ke kawah Gunung Bromo pada waktu-waktu tertentu akan membawa keamanan dan kesejahteraan bagi mereka.
+    Maksud “memberi korban” adalah mendermakan sebagian hasil panen dan ternak ke kawah Bromo. Inilah asal-usul upacara Yadnya Kasada. Versi legenda ini tak berbeda jauh dari versi sejarah. Menurut sejumlah prasasti di sekitar pegunungan Bromo dan Negarakertagama, orang Tengger juga disebut telah bermukim di kawasan Tengger sejak masa Majapahit.</p>
+    <p>Sutarto dalam Legenda Kasada dan Karo Orang Tengger Lumajang, disertasi di Universitas Indonesia tahun 1997, menyebut orang-orang Tengger hidup sebagai petani yang tangguh. Alam sekitar pegunungan yang dingin menempa mereka bekerja sepanjang hari agar tubuh tetap hangat. Hasil panen melimpah dan kebutuhan mereka tercukupi oleh alam di sekelilingnya. Karena itulah mereka menghormati alam dan berusaha menjaga hubungan harmonis dengannya.</p>
+    <p>Gunung Bromo yang berkawah merupakan gunung terendah di antara gunung-gunung lain di kawasan Tengger. Orang Tengger menganggap Gunung Bromo suci. Ia adalah bagian dari alam yang telah membantu orang Tengger menghidupi kesehariannya.
+    </p>
+  </section>
+
+        <section id="video" class="section ethnic-frame">
+  <div class="ethnic-frame video-card">
+    <div class="video-content">
+      <div class="video-text">
+        <h3 style="color:var(--accent); font-size:16px;">Video Upacara</h3>
+        <p style="color:var(--muted); font-size:14px;">
+          <button class="btn" onclick="toggleAudio()">Mainkan Suasana</button>
+          <p>Video dokumenter pendek ini menampilkan proses persembahan dan suasana Bromo.</p>
+        <p style="font-size:12px;color:var(--muted); margin-top:4px;">
+          Perjalanan acara Tradisi Kasada dimulai pagi hari di Pura Luhur Poten, dengan persiapan persembahan dan arahan dari pendeta adat. Suasana khidmat menyelimuti peserta, mengawali doa dan ungkapan syukur kepada Tuhan dan leluhur.
+
+          Puncak acara adalah larung sesaji ke kawah Bromo, di mana hasil bumi, hewan ternak, dan bunga dilempar sebagai simbol pengorbanan dan doa. Beberapa sesaji ditangkap kembali sebagai berkah, menciptakan momen unik dan interaktif bagi pengunjung.
+
+          Acara berlanjut dengan dokumentasi, santap hidangan tradisional, dan workshop ringan, seperti membuat miniatur sesaji atau mengenal legenda Roro Anteng dan Joko Seger.
+
+          Penutupan diisi dengan doa dan foto bersama, meninggalkan pengalaman spiritual dan budaya yang kaya serta rasa syukur yang mendalam di hati peserta.
+        </p>
+      </div>
+
+      <div class="video-wrapper">
+        <video controls style="width:100%; border-radius:12px;">
+          <source src="Kasadadrone (2).mp4" type="video/mp4">
+          Browser Anda tidak mendukung tag video.
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<audio id="ambience" loop preload="auto">
+  <source src="kasadaaudio.m4a" type="audio/mpeg">
+  Browser Anda tidak mendukung tag audio.
+</audio>
+
+    <section id="galeri" class="section ethnic-frame">
+  <h2>Galeri Tradisi</h2>
+  <div class="gallery" aria-live="polite">
+    <figure>
+      <img src="tradisi 1.jpg.jpeg" alt="Tradisi 1">
+      <figcaption>Prosesi di Pura Poten</figcaption>
+    </figure>
+    <figure>
+      <img src="tradisi 2.jpg.jpeg" alt="Tradisi 2">
+      <figcaption>Sesajen dan Persembahan</figcaption>
+    </figure>
+    <figure>
+      <img src="tradisi 3.jpg.jpeg" alt="Tradisi 3">
+      <figcaption>Ritual di Kawah</figcaption>
+    </figure>
+    <figure>
+      <img src="tradisi 4.jpg.jpeg" alt="Tradisi 4">
+      <figcaption>Pakaian Adat Tengger</figcaption>
+    </figure>
+    <figure>
+      <img src="tradisi 5.jpg.jpeg" alt="Tradisi 5">
+      <figcaption>Suasana Malam Kasada</figcaption>
+    </figure>
+  </div>
+</section>
+
+
+<div class="lightbox" id="lightbox" style="
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.85);
+  align-items:center;
+  justify-content:center;
+  z-index:99999;
+">
+  <img id="lb-img" src="" class="lb-img" style="
+    max-width:90%;
+    max-height:90%;
+    border-radius:12px;
+    z-index:99998;
+    position:relative;
+  ">
+  <button id="lb-close" class="btn-close" style="
+    position:absolute;
+    top:20px;
+    right:20px;
+    background:#b8860b;
+    color:white;
+    border:none;
+    padding:8px 12px;
+    cursor:pointer;
+    border-radius:6px;
+    z-index:99999;
+  ">Tutup</button>
+</div>
+
+    <section id="ai" class="section ethnic-frame">
+      <h2>AI & Pelestarian Tradisi</h2>
+      <p>Tradisi Kasada tidak hanya indah secara budaya, tapi juga bisa dilestarikan dengan sentuhan teknologi modern. Dengan kamera 360° dan drone, setiap momen prosesi Kasada dapat direkam secara detail dan diubah menjadi pengalaman virtual AR/VR. Jadi, siapa pun dari seluruh dunia bisa “mengunjungi” Bromo dan merasakan ritual ini, tanpa mengganggu kesakralannya.</p>
+      <p>AI juga memainkan peran penting dalam menjaga sejarah dan visual budaya. Dengan algoritma pengolahan video dan foto, rekaman lama dapat diperbaiki kualitasnya, sementara momen-momen penting diberi tag sehingga mudah dicari. Bahkan AI generatif dapat membuat motif batik atau ilustrasi baru terinspirasi dari Kasada, memungkinkan budaya Tengger tampil di media digital dan souvenir tanpa menghilangkan nilai tradisional.</p>
+      <p>Selain itu, AI edukatif dan IoT mendukung interaksi dan keselamatan. Chatbot budaya dapat menjawab pertanyaan pengunjung atau generasi muda tentang sejarah, filosofi, dan tata cara upacara. Sensor lingkungan dan drone pemantau kawah Bromo memastikan ritual berlangsung aman, sekaligus membantu menjaga alam tetap lestari. Dengan kombinasi tradisi dan teknologi ini, Tradisi Kasada tidak hanya hidup di masa kini, tetapi juga terjaga untuk generasi yang akan datang.</p>
+    </section>
+
+    <div style="padding:40px 20px; text-align:center;">
+
+  <h2 style="font-size:28px; margin-bottom:15px;">Eksplorasi Kawasan Gunung Bromo</h2>
+  <p style="max-width:680px; margin:auto; margin-bottom:25px;">
+    Lihat area Bromo secara langsung melalui Maps dan Street View 360°.
+  </p>
+
+  <div style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap;">
+    
+    <iframe id="mapFrame" 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3954.3097969382337!2d112.95300!3d-7.94220!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd6282542f7c6ef%3A0x9d6af6129245a1bc!2sGunung%20Bromo!5e0!3m2!1sid!2sid!4v1709999999999"
+      width="500" height="350" style="border:0; border-radius:12px;" allowfullscreen loading="lazy">
+    </iframe>
+
+   <iframe
+  src="https://www.google.com/maps/embed?pb=!4v1712925567000!6m8!1m7!1sCAoSLEFGMVFpcE1KSVh1a1FUcFhJVGgxVF9GOW1ZbWFoZWp6VnpwNkdKZk9BQUEw!2m2!1d-7.9421552!2d112.9530307!3f87.55!4f0!5f0.7820865974627469"
+  width="500"
+  height="350"
+  style="border:0; border-radius:12px;"
+  allowfullscreen=""
+  loading="lazy">
+</iframe>
+
+  </div>
+</div>
+
+<section id="kritikSaran" 
+  style="margin-top:50px; padding:20px; 
+         background:var(--card); 
+         border-radius:16px;
+         border:2px solid var(--accent);">
+
+  <h2 style="color:var(--accent); margin-bottom:15px;">Kritik & Saran</h2>
+
+  <form id="saranForm" style="display:flex; flex-direction:column; gap:12px;">
+
+    <textarea id="inputSaran" 
+      placeholder="Tulis kritik atau saran..." 
+      style="padding:14px; 
+             border-radius:12px; 
+             border:2px solid var(--accent);
+             background:var(--bg); 
+             color:var(--text);
+             min-height:90px;
+             outline:none;"></textarea>
+
+    <button type="submit" id="btnKirim"
+      style="padding:12px 20px; 
+             background:#2ecc71;
+             color:white; 
+             border:none; 
+             border-radius:12px; 
+             cursor:pointer; 
+             font-weight:bold;
+             transition:0.2s;">
+      Kirim
+    </button>
+  </form>
+
+  <ul id="listSaran" style="list-style:none; padding:0; margin-top:20px; display:flex; flex-direction:column; gap:12px;"></ul>
+</section>
+
+  <footer>
+    <div>© 2025 Kasada Heritage — Forest Tengger</div>
+  </footer>
+
+<script src="script.js"></script>
+
+<script>
+  document.getElementById("themeToggle").addEventListener("click", function () {
+    document.body.classList.toggle("dark-mode");
+    document.body.classList.toggle("light-mode");
+  });
+</script>
+ 
+</body>
+</html>
